@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Libereay_System.Models.BorrowTransaction>
+
+@{
+    ViewData["Title"] = "Manage Transactions";
+}
+
+<h1>Manage Borrowing Transactions</h1>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Book Title</th>
+            <th>User</th>
+            <th>Borrow Date</th>
+            <th>Return Date</th>
+            <th>Fine Amount</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var transaction in Model)
+        {
+            <tr>
+                <td>@transaction.Book.Title</td>
+                <td>@transaction.User.UserName</td>
+                <td>@transaction.BorrowDate.ToShortDateString()</td>
+                <td>@transaction.ReturnDate?.ToShortDateString() ?? "Not Returned"</td>
+                <td>@transaction.FineAmount.ToString("C")</td>
+                <td>
+                    @if (transaction.ReturnDate == null)
+                    {
+                        <a class="btn btn-success" asp-action="MarkAsReturned" asp-route-id="@transaction.Id">Mark as Returned</a>
+                    }
+                    <a class="btn btn-danger" asp-action="DeleteTransaction" asp-route-id="@transaction.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,32 +1,55 @@
+using Libereay_System.Entity;
 using Libereay_System.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace Libereay_System.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly LibraryDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(LibraryDbContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
-            return View();
+            if (User.IsInRole("Admin"))
+            {
+                return RedirectToAction("AdminDashboard");
+            }
+            else if (User.IsInRole("User"))
+            {
+                return RedirectToAction("UserDashboard");
+            }
+            return RedirectToAction("AccessDenied", "Account");
         }
 
-        public IActionResult Privacy()
+        [Authorize(Roles = "Admin")]
+        public IActionResult AdminDashboard()
         {
-            return View();
+            ViewData["Title"] = "Admin Dashboard";
+
+            var dashboardData = new
+            {
+                TotalBooks = _context.Books.Count(),
+                BorrowedBooks = _context.BorrowTransactions.Count(t => t.ReturnDate == null),
+                OverdueBooks = _context.BorrowTransactions.Count(t => t.ReturnDate == null && (t.BorrowDate.AddDays(14) < DateTime.Now))
+            };
+
+            return View(dashboardData);
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [Authorize(Roles = "User")]
+        public IActionResult UserDashboard()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            ViewData["Title"] = "User Dashboard";
+            return View();
         }
     }
 }

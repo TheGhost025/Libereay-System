@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Book>
+
+<h2>Manage Books</h2>
+<a href="@Url.Action("AddBook", "Admin")" class="btn btn-primary mb-3">Add New Book</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Category</th>
+            <th>ISBN</th>
+            <th>Available Copies</th>
+            <th>Total Copies</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model)
+        {
+            <tr>
+                <td>@book.Title</td>
+                <td>@book.Author</td>
+                <td>@book.Category</td>
+                <td>@book.ISBN</td>
+                <td>@book.AvailableCopies</td>
+                <td>@book.TotalCopies</td>
+                <td>
+                    <a href="@Url.Action("EditBook", "Admin", new { id = book.Id })" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="@Url.Action("DeleteBook", "Admin", new { id = book.Id })" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

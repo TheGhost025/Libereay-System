@@ -13,19 +13,49 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
                 <a class="navbar-brand" href="/">Liberary System</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" asp-action="Index" asp-controller="Home" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         @if (User.Identity.IsAuthenticated)
                         {
+                            <!-- Admin-Specific Links -->
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-action="Index" asp-controller="Home">Dashboard</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-action="ManageBooks" asp-controller="Admin">Manage Books</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-action="ManageTransactions" asp-controller="Admin">Borrowing Transactions</a>
+                                </li>
+                            }
+
+                            <!-- User-Specific Links -->
+                            @if (User.IsInRole("User"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-action="SearchBooks" asp-controller="User">Search Books</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-action="BorrowedBooks" asp-controller="User">My Borrowed Books</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-action="BorrowHistory" asp-controller="User">Borrowing History</a>
+                                </li>
+                            }
+
+                            <!-- Common for all authenticated users -->
                             <li class="nav-item">
-                                <a class="nav-link" href="/Account/Logout">Logout (@User.Identity.Name)</a>
+                                <a class="nav-link" asp-action="Logout" asp-controller="Account">Logout (@User.Identity.Name)</a>
                             </li>
                         }
                         else
                         {
+                            <!-- Links for unauthenticated users -->
                             <li class="nav-item">
                                 <a class="nav-link" href="/Account/Login">Login</a>
                             </li>
