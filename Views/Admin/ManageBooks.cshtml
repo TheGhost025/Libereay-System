@@ -6,6 +6,7 @@
 <table class="table table-striped">
     <thead>
         <tr>
+            <th>Image</th>
             <th>Title</th>
             <th>Author</th>
             <th>Category</th>
@@ -19,6 +20,17 @@
         @foreach (var book in Model)
         {
             <tr>
+                <td class="d-flex justify-content-center">
+                    <!-- Display book image if it exists -->
+                    @if (!string.IsNullOrEmpty(book.ImagePath))
+                    {
+                        <img src="@book.ImagePath" alt="Book Image" class="img-thumbnail" style="width: 50px; height: 75px; object-fit: cover;" />
+                    }
+                    else
+                    {
+                        <span class="text-muted">No image available</span>
+                    }
+                </td>
                 <td>@book.Title</td>
                 <td>@book.Author</td>
                 <td>@book.Category</td>
@@ -26,6 +38,7 @@
                 <td>@book.AvailableCopies</td>
                 <td>@book.TotalCopies</td>
                 <td>
+                    <a href="@Url.Action("BookDetails", "Admin", new { id = book.Id })" class="btn btn-info btn-sm">View Details</a>
                     <a href="@Url.Action("EditBook", "Admin", new { id = book.Id })" class="btn btn-warning btn-sm">Edit</a>
                     <a href="@Url.Action("DeleteBook", "Admin", new { id = book.Id })" class="btn btn-danger btn-sm">Delete</a>
                 </td>

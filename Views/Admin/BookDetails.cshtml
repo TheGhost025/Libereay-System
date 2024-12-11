@@ -1,0 +1,46 @@
+﻿@model Book
+
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container">
+    <h2>@Model.Title</h2>
+    <div class="row">
+        <div class="col-md-4">
+            @if (!string.IsNullOrEmpty(Model.ImagePath))
+            {
+                <img src="@Model.ImagePath" alt="Book Image" class="img-fluid rounded" />
+            }
+            else
+            {
+                <span class="text-muted">No image available</span>
+            }
+        </div>
+        <div class="col-md-8">
+            <table class="table">
+                <tr>
+                    <th>Author</th>
+                    <td>@Model.Author</td>
+                </tr>
+                <tr>
+                    <th>Category</th>
+                    <td>@Model.Category</td>
+                </tr>
+                <tr>
+                    <th>ISBN</th>
+                    <td>@Model.ISBN</td>
+                </tr>
+                <tr>
+                    <th>Available Copies</th>
+                    <td>@Model.AvailableCopies</td>
+                </tr>
+                <tr>
+                    <th>Total Copies</th>
+                    <td>@Model.TotalCopies</td>
+                </tr>
+            </table>
+            <a href="@Url.Action("ManageBooks", "Admin")" class="btn btn-primary">Back to List</a>
+        </div>
+    </div>
+</div>

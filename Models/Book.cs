@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Libereay_System.Models
 {
@@ -26,5 +27,13 @@ namespace Libereay_System.Models
         public int TotalCopies { get; set; }
 
         public int AvailableCopies { get; set; }
+
+        // ImagePath is not required, but will be set after the file is uploaded
+        public string? ImagePath { get; set; }
+
+        // IFormFile is required to handle file upload
+        [NotMapped]
+        [Required(ErrorMessage = "Image is required.")]
+        public IFormFile ImageFile { get; set; }
     }
 }
