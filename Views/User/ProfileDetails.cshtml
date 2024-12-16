@@ -1,0 +1,29 @@
+﻿@model ApplicationUser
+
+<div class="container mt-4">
+    <h2 class="mb-4">Your Profile</h2>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <table class="table table-borderless">
+                <tr>
+                    <th class="text-secondary">First Name</th>
+                    <td>@Model.FirstName</td>
+                </tr>
+                <tr>
+                    <th class="text-secondary">Last Name</th>
+                    <td>@Model.LastName</td>
+                </tr>
+                <tr>
+                    <th class="text-secondary">Email</th>
+                    <td>@Model.Email</td>
+                </tr>
+            </table>
+        </div>
+        <div class="card-footer text-right">
+            <a class="btn btn-primary" asp-action="EditProfile" asp-controller="User">Edit Profile</a>
+        </div>
+    </div>
+</div>
+
+

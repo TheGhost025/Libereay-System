@@ -44,13 +44,16 @@
                             @if (User.IsInRole("User"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-action="SearchBooks" asp-controller="User">Search Books</a>
+                                    <a class="nav-link" asp-action="Index" asp-controller="Home">Dashboard</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-action="BorrowedBooks" asp-controller="User">My Borrowed Books</a>
+                                    <a class="nav-link" asp-action="BrowseBooks" asp-controller="User">Browse Books</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-action="BorrowHistory" asp-controller="User">Borrowing History</a>
+                                    <a class="nav-link" asp-action="BorrowingHistory" asp-controller="User">Borrowing History</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-action="ProfileDetails" asp-controller="User">Profile</a>
                                 </li>
                             }
 

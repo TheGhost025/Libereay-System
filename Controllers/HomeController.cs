@@ -46,10 +46,26 @@ namespace Libereay_System.Controllers
         }
 
         [Authorize(Roles = "User")]
-        public IActionResult UserDashboard()
+        public async Task<IActionResult> UserDashboardAsync()
         {
-            ViewData["Title"] = "User Dashboard";
-            return View();
+            var userId = User.Identity.Name; // Get the current user's ID
+
+            // Get featured books (you can modify this to fit your business logic)
+            var featuredBooks = await _context.Books.Take(6).ToListAsync(); // Example: Get the first 6 books
+
+            // Get borrowed books for the user
+            var borrowedBooks = await _context.BorrowTransactions
+                .Where(t => t.UserId == userId && t.ReturnDate == null) // Only borrow transactions where the book is not yet returned
+                .Include(t => t.Book)
+                .ToListAsync();
+
+            var model = new UserDashboardViewModel
+            {
+                FeaturedBooks = featuredBooks,
+                BorrowedBooks = borrowedBooks
+            };
+
+            return View(model);
         }
     }
 }

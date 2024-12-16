@@ -1,0 +1,51 @@
+﻿@model Book
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="row g-0">
+            <!-- Book Image -->
+            <div class="col-md-4">
+                @if (!string.IsNullOrEmpty(Model.ImagePath))
+                {
+                    <img src="@Model.ImagePath" alt="@Model.Title" class="img-fluid rounded-start" style="max-height: 100%; object-fit: cover;">
+                }
+                else
+                {
+                    <div class="d-flex align-items-center justify-content-center h-100 bg-light text-muted">
+                        <p>No image available</p>
+                    </div>
+                }
+            </div>
+
+            <!-- Book Details -->
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h2 class="card-title">@Model.Title</h2>
+                    <p class="card-text"><strong>Author:</strong> @Model.Author</p>
+                    <p class="card-text"><strong>Category:</strong> @Model.Category</p>
+                    <p class="card-text"><strong>ISBN:</strong> @Model.ISBN</p>
+                    <p class="card-text">
+                        <strong>Status:</strong>
+                        <span class="@(Model.AvailableCopies > 0 ? "text-success" : "text-danger")">
+                            @(Model.AvailableCopies > 0 ? "Available" : "Borrowed")
+                        </span>
+                    </p>
+                    <p class="card-text"><strong>Available Copies:</strong> @Model.AvailableCopies</p>
+
+                    <!-- Borrow Button -->
+                    @if (Model.AvailableCopies > 0)
+                    {
+                        <form method="post" asp-action="BorrowBook" asp-controller="User">
+                            <input type="hidden" name="bookId" value="@Model.Id" />
+                            <button type="submit" class="btn btn-primary">Borrow</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <p class="text-danger">This book is currently unavailable.</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

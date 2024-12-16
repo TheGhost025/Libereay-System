@@ -1,0 +1,52 @@
+﻿@model ApplicationUser
+
+<div class="container mt-4">
+    <h2 class="mb-4">Edit Profile</h2>
+
+    <form method="post" asp-action="EditProfile" class="needs-validation" novalidate>
+        <!-- First Name -->
+        <div class="form-group">
+            <label for="FirstName">First Name</label>
+            <input type="text"
+                   class="form-control @(!string.IsNullOrEmpty(Model.FirstName) ? "is-invalid" : "")"
+                   id="FirstName"
+                   name="FirstName"
+                   value="@Model.FirstName"
+                   required />
+            <div class="invalid-feedback">
+                Please provide a valid first name.
+            </div>
+        </div>
+
+        <!-- Last Name -->
+        <div class="form-group">
+            <label for="LastName">Last Name</label>
+            <input type="text"
+                   class="form-control @(!string.IsNullOrEmpty(Model.LastName) ? "is-invalid" : "")"
+                   id="LastName"
+                   name="LastName"
+                   value="@Model.LastName"
+                   required />
+            <div class="invalid-feedback">
+                Please provide a valid last name.
+            </div>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+            <label for="Email">Email</label>
+            <input type="email"
+                   class="form-control @(!string.IsNullOrEmpty(Model.Email) ? "is-invalid" : "")"
+                   id="Email"
+                   name="Email"
+                   value="@Model.Email"
+                   required />
+            <div class="invalid-feedback">
+                Please provide a valid email address.
+            </div>
+        </div>
+
+        <!-- Save Changes Button -->
+        <button type="submit" class="btn btn-success">Save Changes</button>
+    </form>
+</div>

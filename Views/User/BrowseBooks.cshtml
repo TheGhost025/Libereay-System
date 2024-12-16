@@ -1,0 +1,83 @@
+﻿@model BrowseBooksViewModel
+
+<div class="container mt-4">
+    <h2 class="mb-4">Browse Books</h2>
+
+    <!-- Search and Filter Form -->
+    <form method="get" class="mb-4">
+        <div class="form-row">
+            <div class="col-md-4 mb-2">
+                <input type="text" class="form-control" name="searchQuery" placeholder="Search by title or author" value="@Model.SearchQuery" />
+            </div>
+            <div class="col-md-4 mb-2">
+                <select class="form-control" name="category">
+                    <option value="">All Categories</option>
+                    @foreach (var category in ViewBag.Categories as SelectList)
+                    {
+                        @if (category.Value == Model.SelectedCategory)
+                        {
+                            <option value="@category.Value" selected)>@category.Text</option>
+                        }
+                        else
+                        {
+                            <option value="@category.Value" )>@category.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="col-md-4 mb-2">
+                <button type="submit" class="btn btn-primary w-100">Search</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- Books Table -->
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Category</th>
+                <th>Available Copies</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Books.Any())
+            {
+                @foreach (var book in Model.Books)
+                {
+                    <tr>
+                        <td>@book.Title</td>
+                        <td>@book.Author</td>
+                        <td>@book.Category</td>
+                        <td>
+                            <span class="@(book.AvailableCopies > 0 ? "text-success" : "text-danger")">
+                                @book.AvailableCopies
+                            </span>
+                        </td>
+                        <td>
+                            @if (book.AvailableCopies > 0)
+                            {
+                                <form asp-action="BorrowBook" method="post">
+                                    <input type="hidden" name="bookId" value="@book.Id" />
+                                    <button type="submit" class="btn btn-sm btn-primary">Borrow</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <span class="text-danger">Not Available</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="5" class="text-center text-muted">No books found. Please adjust your search or filters.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

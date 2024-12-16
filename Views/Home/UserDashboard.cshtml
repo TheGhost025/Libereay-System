@@ -1,8 +1,67 @@
-﻿@{
-    ViewData["Title"] = "User Dashboard";
-}
+﻿@model UserDashboardViewModel
 
-<div class="container mt-5">
-    <h1>Welcome to the User Dashboard</h1>
-    <p>Access your profile, view orders, and explore the system.</p>
+<div class="container mt-4">
+    <div class="jumbotron text-center py-4">
+        <h1 class="display-4">Welcome to the Library</h1>
+        <p class="lead">Discover books, track your borrow history, and manage your returns.</p>
+    </div>
+
+    <!-- Featured Books Section -->
+    <section class="featured-books mt-5">
+        <h3 class="mb-4">Featured Books</h3>
+        <div class="row">
+            @foreach (var book in Model.FeaturedBooks)
+            {
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <img class="card-img-top" src="@book.ImagePath" alt="@book.Title" style="height: 200px; object-fit: cover;">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title text-truncate">@book.Title</h5>
+                            <p class="card-text text-muted text-truncate">by @book.Author</p>
+                            <a class="btn btn-primary mt-auto" asp-action="BookDetails" asp-controller="User" asp-route-id="@book.Id">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+
+    <!-- Borrowed Books Section -->
+    <section class="borrowed-books mt-5">
+        <h3 class="mb-4">Your Borrowed Books</h3>
+        @if (Model.BorrowedBooks.Any())
+        {
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Book</th>
+                            <th>Borrowed Date</th>
+                            <th>Return Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var transaction in Model.BorrowedBooks)
+                        {
+                            <tr>
+                                <td>@transaction.Book.Title</td>
+                                <td>@transaction.BorrowDate.ToShortDateString()</td>
+                                <td>@(transaction.ReturnDate.HasValue ? transaction.ReturnDate.Value.ToShortDateString() : "Not Returned")</td>
+                                <td class="@(transaction.ReturnDate.HasValue ? "text-success" : "text-danger")">
+                                    @(transaction.ReturnDate.HasValue ? "Returned" : "Not Returned")
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-info" role="alert">
+                You haven't borrowed any books yet.
+            </div>
+        }
+    </section>
 </div>
