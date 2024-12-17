@@ -76,7 +76,7 @@ namespace Libereay_System.Controllers
                 book.AvailableCopies = book.TotalCopies;
                 _context.Books.Add(book);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("BookDetails", "Admin", new { id = book.Id });
+                return RedirectToAction("BookDetails", "Book", new { id = book.Id });
             }
             ViewData["Title"] = "Create Book";
             ViewData["Action"] = "AddBook";

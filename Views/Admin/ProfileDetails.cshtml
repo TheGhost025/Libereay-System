@@ -1,11 +1,31 @@
-﻿@model Libereay_System.Models.ApplicationUser
+﻿@model ApplicationUser
 
-<h2>Profile Details</h2>
+<div class="container mt-4">
+    <h2 class="mb-4">Your Profile</h2>
 
-<div>
-    <h4>@Model.FirstName @Model.LastName</h4>
-    <p><strong>Email:</strong> @Model.Email</p>
-    <p><strong>Role:</strong> @Model.Role</p>
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <table class="table table-borderless">
+                <tr>
+                    <th class="text-secondary">First Name</th>
+                    <td>@Model.FirstName</td>
+                </tr>
+                <tr>
+                    <th class="text-secondary">Last Name</th>
+                    <td>@Model.LastName</td>
+                </tr>
+                <tr>
+                    <th class="text-secondary">Email</th>
+                    <td>@Model.Email</td>
+                </tr>
+                <tr>
+                    <th class="text-secondary">Role</th>
+                    <td>@Model.Role</td>
+                </tr>
+            </table>
+        </div>
+        <div class="card-footer text-right">
+            <a class="btn btn-primary" asp-action="EditProfile" asp-controller="Admin">Edit Profile</a>
+        </div>
+    </div>
 </div>
-
-<a asp-action="EditProfile" asp-controller="Admin" class="btn btn-warning">Edit Profile</a>
