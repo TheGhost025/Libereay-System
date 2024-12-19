@@ -27,13 +27,7 @@
                         <td>@transaction.Book.Author</td>
                         <td>@transaction.BorrowDate.ToShortDateString()</td>
                         <td>
-                            @if(transaction.ReturnDate.HasValue){
-                                @transaction.ReturnDate.Value.ToShortDateString();
-                            }
-                            else
-                            {
-                            <span class='text-danger'>Not Returned</span>
-                            }
+                            @(transaction.ReturnDate?.ToShortDateString() == null ? transaction.BorrowDate.AddDays(14).ToShortDateString() : transaction.ReturnDate?.ToShortDateString())
                         </td>
                         <td>
                             @if (!transaction.ReturnDate.HasValue)

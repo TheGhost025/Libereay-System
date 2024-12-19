@@ -47,7 +47,7 @@
                             <tr>
                                 <td>@transaction.Book.Title</td>
                                 <td>@transaction.BorrowDate.ToShortDateString()</td>
-                                <td>@(transaction.ReturnDate.HasValue ? transaction.ReturnDate.Value.ToShortDateString() : "Not Returned")</td>
+                                <td>>@(transaction.ReturnDate?.ToShortDateString() == null ? transaction.BorrowDate.AddDays(14).ToShortDateString() : transaction.ReturnDate?.ToShortDateString())</td>
                                 <td class="@(transaction.ReturnDate.HasValue ? "text-success" : "text-danger")">
                                     @(transaction.ReturnDate.HasValue ? "Returned" : "Not Returned")
                                 </td>

@@ -168,25 +168,28 @@ namespace Libereay_System.Controllers
                 .Include(t => t.Book)
                 .FirstOrDefaultAsync(t => t.Id == id);
 
-            if (transaction == null)
+            if (transaction == null || transaction.ReturnDate != null)
             {
-                return NotFound();
+                TempData["ErrorMessage"] = "Invalid return request.";
+                return RedirectToAction(nameof(ManageTransactions));
             }
 
+            // Calculate fine
+            var fineConfig = await _context.FineConfigurations.FirstOrDefaultAsync();
+            var overdueDays = (DateTime.Now - transaction.BorrowDate).Days - 14; // Assuming 14 days borrowing period
+            if (overdueDays > 0)
+            {
+                transaction.FineAmount = overdueDays * fineConfig.FinePerDay;
+            }
+
+            // Mark the transaction as returned
             transaction.ReturnDate = DateTime.Now;
-            transaction.Book.AvailableCopies++;
+            transaction.Book.AvailableCopies += 1;
 
-            // Fine logic: Calculate the number of overdue days
-            const int BorrowLimitDays = 14; // Example borrowing limit
-            const decimal FinePerDay = 0.5m; // Example fine rate: $0.50 per day
-            var overdueDays = (transaction.ReturnDate.Value - transaction.BorrowDate).TotalDays - BorrowLimitDays;
 
-            // Apply fine if overdue
-            transaction.FineAmount = overdueDays > 0 ? (decimal)overdueDays * FinePerDay : 0;
-
-            _context.BorrowTransactions.Update(transaction);
             await _context.SaveChangesAsync();
 
+            TempData["SuccessMessage"] = "Book returned successfully!";
             return RedirectToAction(nameof(ManageTransactions));
         }
 

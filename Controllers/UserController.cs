@@ -57,7 +57,8 @@ namespace Libereay_System.Controllers
 
         public async Task<IActionResult> BorrowBook(int bookId)
         {
-            var userId = User.Identity.Name; // Assuming User.Identity.Name stores the logged-in user ID
+            var userEmail = User.Identity.Name; // Assuming User.Identity.Name stores the logged-in user ID
+            var userId = _context.Users.FirstOrDefault(u => u.UserName == userEmail).Id;
             var book = await _context.Books.FindAsync(bookId);
 
             if (book == null || book.AvailableCopies <= 0)
@@ -75,7 +76,6 @@ namespace Libereay_System.Controllers
                 ReturnDate = null // Not returned yet
             };
 
-            // Update AvailableCopies and save changes
             book.AvailableCopies -= 1;
             _context.BorrowTransactions.Add(borrowTransaction);
             await _context.SaveChangesAsync();
@@ -96,11 +96,18 @@ namespace Libereay_System.Controllers
                 return RedirectToAction("BorrowingHistory");
             }
 
+            // Calculate fine
+            var fineConfig = await _context.FineConfigurations.FirstOrDefaultAsync();
+            var overdueDays = (DateTime.Now - transaction.BorrowDate).Days - 14; // Assuming 14 days borrowing period
+            if (overdueDays > 0)
+            {
+                transaction.FineAmount = overdueDays * fineConfig.FinePerDay;
+            }
+
             // Mark the transaction as returned
             transaction.ReturnDate = DateTime.Now;
-
-            // Update the book's AvailableCopies
             transaction.Book.AvailableCopies += 1;
+
 
             await _context.SaveChangesAsync();
 
@@ -110,7 +117,8 @@ namespace Libereay_System.Controllers
 
         public IActionResult BorrowingHistory()
         {
-            var userId = User.Identity.Name; // Assuming User.Identity.Name stores the logged-in user ID
+            var userEmail = User.Identity.Name; // Assuming User.Identity.Name stores the logged-in user ID
+            var userId = _context.Users.FirstOrDefault(u => u.UserName == userEmail).Id;
             var transactions = _context.BorrowTransactions
                 .Where(t => t.UserId == userId)
                 .Include(t => t.Book)

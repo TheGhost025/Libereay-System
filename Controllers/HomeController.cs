@@ -48,7 +48,8 @@ namespace Libereay_System.Controllers
         [Authorize(Roles = "User")]
         public async Task<IActionResult> UserDashboardAsync()
         {
-            var userId = User.Identity.Name; // Get the current user's ID
+            var userEmail = User.Identity.Name; // Assuming User.Identity.Name stores the logged-in user ID
+            var userId = _context.Users.FirstOrDefault(u => u.UserName == userEmail).Id;
 
             // Get featured books (you can modify this to fit your business logic)
             var featuredBooks = await _context.Books.Take(6).ToListAsync(); // Example: Get the first 6 books

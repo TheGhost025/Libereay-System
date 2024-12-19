@@ -1,6 +1,7 @@
 ﻿using Libereay_System.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Libereay_System.Controllers
 {
@@ -77,7 +78,8 @@ namespace Libereay_System.Controllers
 
                     // Sign in user
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("LogIn","Account");
+
+                    return RedirectToAction("Index", "Home");
                 }
 
                 foreach (var error in result.Errors) 

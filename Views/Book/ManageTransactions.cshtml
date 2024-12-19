@@ -24,7 +24,7 @@
                 <td>@transaction.Book.Title</td>
                 <td>@transaction.User.UserName</td>
                 <td>@transaction.BorrowDate.ToShortDateString()</td>
-                <td>@transaction.ReturnDate?.ToShortDateString() ?? "Not Returned"</td>
+                <td>@(transaction.ReturnDate?.ToShortDateString() == null ? transaction.BorrowDate.AddDays(14).ToShortDateString() :transaction.ReturnDate?.ToShortDateString())</td>
                 <td>@transaction.FineAmount.ToString("C")</td>
                 <td>
                     @if (transaction.ReturnDate == null)
