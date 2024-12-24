@@ -30,3 +30,64 @@ footer {
     font-weight: bold;
     text-align: center;
 }
+
+/* Fade-in Animation */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 1.5s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Slide-in animation */
+@keyframes slideIn {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+
+/* Slide-in for cards */
+.slide-in {
+    animation: slideIn 1s ease-out;
+}
+
+.animate-card {
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.animate-input input,
+.animate-input select {
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+    .animate-input input:focus,
+    .animate-input select:focus {
+        box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+        outline: none;
+    }
+
+.animate-button {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+    .animate-button:hover {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }

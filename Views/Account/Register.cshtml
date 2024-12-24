@@ -6,9 +6,9 @@
 
 <div class="row justify-content-center my-5">
     <div class="col-lg-6 col-md-8 col-sm-10">
-        <div class="card shadow-lg">
+        <div class="card shadow-lg animate-card">
             <div class="card-header bg-primary text-white text-center">
-                <h4>Create an Account</h4>
+                <h4 class="animate-header">Create an Account</h4>
             </div>
             <div class="card-body">
                 <form asp-action="Register" method="post" novalidate>
@@ -16,41 +16,41 @@
                     <div class="mb-3">
                         @if (ViewData.ModelState.ErrorCount > 0)
                         {
-                            <div class="alert alert-danger">
+                            <div class="alert alert-danger animate-error">
                                 @Html.ValidationSummary(false, "", new { @class = "mb-0" })
                             </div>
                         }
                     </div>
                     <!-- First Name -->
-                    <div class="mb-3">
+                    <div class="mb-3 animate-input">
                         <label asp-for="FirstName" class="form-label fw-bold">First Name</label>
                         <input asp-for="FirstName" class="form-control" placeholder="Enter your first name" />
                         <span asp-validation-for="FirstName" class="text-danger small"></span>
                     </div>
 
                     <!-- Last Name -->
-                    <div class="mb-3">
+                    <div class="mb-3 animate-input">
                         <label asp-for="LastName" class="form-label fw-bold">Last Name</label>
                         <input asp-for="LastName" class="form-control" placeholder="Enter your last name" />
                         <span asp-validation-for="LastName" class="text-danger small"></span>
                     </div>
 
                     <!-- Email -->
-                    <div class="mb-3">
+                    <div class="mb-3 animate-input">
                         <label asp-for="Email" class="form-label fw-bold">Email Address</label>
                         <input asp-for="Email" class="form-control" placeholder="Enter your email" />
                         <span asp-validation-for="Email" class="text-danger small"></span>
                     </div>
 
                     <!-- Password -->
-                    <div class="mb-3">
+                    <div class="mb-3 animate-input">
                         <label asp-for="Password" class="form-label fw-bold">Password</label>
                         <input asp-for="Password" type="password" class="form-control" placeholder="Create a password" />
                         <span asp-validation-for="Password" class="text-danger small"></span>
                     </div>
 
                     <!-- Confirm Password -->
-                    <div class="mb-3">
+                    <div class="mb-3 animate-input">
                         <label asp-for="ConfirmPassword" class="form-label fw-bold">Confirm Password</label>
                         <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="Re-enter your password" />
                         <span asp-validation-for="ConfirmPassword" class="text-danger small"></span>
@@ -59,7 +59,7 @@
                     <!-- Role Selection (Optional) -->
                     @if (ViewBag.Roles != null)
                     {
-                        <div class="mb-3">
+                        <div class="mb-3 animate-input">
                             <label for="Role" class="form-label fw-bold">Select Role</label>
                             <select id="Role" name="Role" class="form-select">
                                 <option value="">-- Select Role --</option>
@@ -72,7 +72,7 @@
                     }
 
                     <!-- Register Button -->
-                    <button type="submit" class="btn btn-primary w-100 py-2">Register</button>
+                    <button type="submit" class="btn btn-primary w-100 py-2 animate-button">Register</button>
                 </form>
             </div>
             <div class="card-footer text-center">
@@ -86,5 +86,25 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation-unobtrusive@3.2.12/dist/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+    // Animate card entrance
+    gsap.from(".animate-card", { duration: 1, y: 50, opacity: 0, ease: "power1.out" });
+
+    // Animate header
+    gsap.from(".animate-header", { duration: 1.5, x: -50, opacity: 0, delay: 0.5, ease: "power1.out" });
+
+    // Animate inputs
+    gsap.from(".animate-input", { duration: 1, x: -100, opacity: 0, stagger: 0.2, delay: 0.5, ease: "power1.out" });
+
+    // Animate button hover
+    const registerButton = document.querySelector(".animate-button");
+    registerButton.addEventListener("mouseover", () => {
+        gsap.to(registerButton, { duration: 0.3, scale: 1.05, ease: "power1.out" });
+    });
+    registerButton.addEventListener("mouseout", () => {
+        gsap.to(registerButton, { duration: 0.3, scale: 1, ease: "power1.out" });
+    });
+    </script>
 }
 
