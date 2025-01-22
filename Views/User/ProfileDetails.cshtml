@@ -1,11 +1,11 @@
 ﻿@model ApplicationUser
 
-<div class="container mt-4">
-    <h2 class="mb-4">Your Profile</h2>
+<div class="container mt-4 fade-in">
+    <h2 class="mb-4 fade-in-title">Your Profile</h2>
 
-    <div class="card shadow-sm">
-        <div class="card-body">
-            <table class="table table-borderless">
+    <div class="card shadow-sm profile-card fade-in-card">
+        <div class="card-body fade-in-content">
+            <table class="table table-borderless fade-in-table">
                 <tr>
                     <th class="text-secondary">First Name</th>
                     <td>@Model.FirstName</td>
@@ -25,7 +25,7 @@
             </table>
         </div>
         <div class="card-footer text-right">
-            <a class="btn btn-primary" asp-action="EditProfile" asp-controller="User">Edit Profile</a>
+            <a class="btn btn-primary btn-animated" asp-action="EditProfile" asp-controller="User">Edit Profile</a>
         </div>
     </div>
 </div>

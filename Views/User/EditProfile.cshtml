@@ -1,11 +1,11 @@
 ﻿@model ApplicationUser
 
-<div class="container mt-4">
-    <h2 class="mb-4">Edit Profile</h2>
+<div class="container mt-4 fade-in">
+    <h2 class="mb-4 fade-in-title">Edit Profile</h2>
 
-    <form method="post" asp-action="EditProfile" class="needs-validation" novalidate>
+    <form method="post" asp-action="EditProfile" class="needs-validation fade-in-form animate-card" novalidate>
         <!-- First Name -->
-        <div class="form-group">
+        <div class="form-group animate-input">
             <label for="FirstName">First Name</label>
             <input type="text"
                    class="form-control @(!string.IsNullOrEmpty(Model.FirstName) ? "is-invalid" : "")"
@@ -19,7 +19,7 @@
         </div>
 
         <!-- Last Name -->
-        <div class="form-group">
+        <div class="form-group animate-input">
             <label for="LastName">Last Name</label>
             <input type="text"
                    class="form-control @(!string.IsNullOrEmpty(Model.LastName) ? "is-invalid" : "")"
@@ -33,7 +33,7 @@
         </div>
 
         <!-- Email -->
-        <div class="form-group">
+        <div class="form-group animate-input">
             <label for="Email">Email</label>
             <input type="email"
                    class="form-control @(!string.IsNullOrEmpty(Model.Email) ? "is-invalid" : "")"
@@ -47,6 +47,6 @@
         </div>
 
         <!-- Save Changes Button -->
-        <button type="submit" class="btn btn-success">Save Changes</button>
+        <button type="submit" class="btn btn-success btn-animated">Save Changes</button>
     </form>
 </div>
