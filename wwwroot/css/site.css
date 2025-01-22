@@ -37,6 +37,147 @@ footer {
     animation: fadeIn 1.5s ease-in-out forwards;
 }
 
+.fade-in-form {
+    opacity: 0;
+    animation: fadeIn 1.5s ease-in-out forwards 0.5s;
+}
+
+/* Fade-in Animation for Title */
+.fade-in-title {
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards 0.2s;
+}
+
+/* Fade-in for Content */
+.fade-in-content {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 1s ease-in-out forwards 0.4s;
+}
+
+/* Fade-in Animation for Table */
+.fade-in-table {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 1s ease-in-out forwards 0.6s;
+}
+
+/* Fade-in Animation for Title */
+.fade-in-title-edit-book {
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeIn 0.8s ease-in-out forwards;
+}
+
+/* Fade-in Animation for Form and Elements */
+.fade-in-form-edit-book {
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards 0.2s;
+}
+
+.fade-in-element {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 1s ease-in-out forwards;
+    animation-delay: 0.3s;
+}
+
+/* Fade-in Animation for Image */
+.fade-in-image-book {
+    opacity: 0;
+    animation: fadeInImage 1.5s ease-in-out forwards 0.8s;
+}
+
+.fade-in-image {
+    opacity: 0;
+    animation: fadeInImage 1.5s ease-in-out forwards 1s;
+}
+
+/* Fade-in Animation for Title */
+.fade-in-title-manage-books {
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeIn 0.8s ease-in-out forwards;
+}
+
+/* Fade-in Animation for Table and Rows */
+.fade-in-table-manage-books {
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+}
+
+.fade-in-row {
+    opacity: 0;
+    animation: fadeInRow 0.5s ease-in-out forwards;
+}
+
+    .fade-in-row:nth-child(even) {
+        animation-delay: 0.2s;
+    }
+
+    .fade-in-row:nth-child(odd) {
+        animation-delay: 0.3s;
+    }
+
+/* Card Fade-in Animation */
+.fade-in-card {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInCard 0.8s ease-in-out forwards;
+}
+
+    .fade-in-card:nth-child(1) {
+        animation-delay: 0.3s;
+    }
+
+    .fade-in-card:nth-child(2) {
+        animation-delay: 0.5s;
+    }
+
+    .fade-in-card:nth-child(3) {
+        animation-delay: 0.7s;
+    }
+
+/* Fade-in Animation for Sections */
+.fade-in-user {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 1s ease-out forwards;
+}
+
+    .fade-in-user:nth-child(1) {
+        animation-delay: 0.3s;
+    }
+
+    .fade-in-user:nth-child(2) {
+        animation-delay: 0.5s;
+    }
+
+    .fade-in-user:nth-child(3) {
+        animation-delay: 0.7s;
+    }
+
+/* Scale Hover Animation for Cards */
+.scale-hover {
+    transition: transform 0.3s ease-in-out;
+}
+
+    .scale-hover:hover {
+        transform: scale(1.05);
+    }
+
+@keyframes fadeInImage {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
 @keyframes fadeIn {
     0% {
         opacity: 0;
@@ -44,6 +185,18 @@ footer {
     }
 
     100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInRow {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
         opacity: 1;
         transform: translateY(0);
     }
@@ -60,6 +213,25 @@ footer {
         transform: translateX(0);
         opacity: 1;
     }
+}
+
+
+@keyframes fadeInCard {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Card Hover Animation */
+.card:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
 }
 
 
@@ -90,4 +262,47 @@ footer {
 
     .animate-button:hover {
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+
+/* Profile Card Hover Effect */
+.profile-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .profile-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+/* Button Hover Animation */
+.btn-animated {
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+    .btn-animated:hover {
+        background-color: #0056b3; /* Darker shade on hover */
+        transform: scale(1.05); /* Slight zoom */
+    }
+
+    /* Ripple Effect on Button */
+    .btn-animated::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 20px;
+        height: 20px;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 50%;
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0;
+        transition: opacity 0.4s, transform 0.4s;
+    }
+
+    .btn-animated:active::after {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(10);
     }

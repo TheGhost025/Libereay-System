@@ -1,13 +1,13 @@
 ﻿@model EditProfileViewModel
 
-<h2>Edit Profile</h2>
+<h2 class="fade-in">Edit Profile</h2>
 
 @if (TempData["SuccessMessage"] != null)
 {
-    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+    <div class="alert alert-success fade-in">@TempData["SuccessMessage"]</div>
 }
 
-<form asp-action="EditProfile" asp-controller="Admin" method="post">
+<form asp-action="EditProfile" asp-controller="Admin" method="post" class="fade-in">
     <div class="form-group">
         <label asp-for="FirstName"></label>
         <input asp-for="FirstName" class="form-control" />
@@ -26,5 +26,5 @@
         <span asp-validation-for="Email" class="text-danger"></span>
     </div>
 
-    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <button type="submit" class="btn btn-primary btn-animated">Save Changes</button>
 </form>

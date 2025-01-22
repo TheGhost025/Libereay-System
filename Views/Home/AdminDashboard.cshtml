@@ -1,9 +1,9 @@
 ﻿@model dynamic
 
-<h2>Admin Dashboard</h2>
+<h2 class="fade-in-title-manage-books">Admin Dashboard</h2>
 <div class="row">
     <div class="col-md-4">
-        <div class="card bg-primary text-white">
+        <div class="card bg-primary text-white fade-in-card">
             <div class="card-body">
                 <h5>Total Books</h5>
                 <h3>@Model.TotalBooks</h3>
@@ -11,7 +11,7 @@
         </div>
     </div>
     <div class="col-md-4">
-        <div class="card bg-warning text-dark">
+        <div class="card bg-warning text-dark fade-in-card">
             <div class="card-body">
                 <h5>Borrowed Books</h5>
                 <h3>@Model.BorrowedBooks</h3>
@@ -19,7 +19,7 @@
         </div>
     </div>
     <div class="col-md-4">
-        <div class="card bg-danger text-white">
+        <div class="card bg-danger text-white fade-in-card">
             <div class="card-body">
                 <h5>Overdue Books</h5>
                 <h3>@Model.OverdueBooks</h3>

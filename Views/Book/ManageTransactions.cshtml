@@ -4,9 +4,9 @@
     ViewData["Title"] = "Manage Transactions";
 }
 
-<h1>Manage Borrowing Transactions</h1>
+<h1 class="fade-in-title-manage-books">Manage Borrowing Transactions</h1>
 
-<table class="table table-bordered table-striped">
+<table class="table table-bordered table-striped fade-in-table-manage-books">
     <thead>
         <tr>
             <th>Book Title</th>
@@ -20,7 +20,7 @@
     <tbody>
         @foreach (var transaction in Model)
         {
-            <tr>
+            <tr class="fade-in-row">
                 <td>@transaction.Book.Title</td>
                 <td>@transaction.User.UserName</td>
                 <td>@transaction.BorrowDate.ToShortDateString()</td>
@@ -29,9 +29,9 @@
                 <td>
                     @if (transaction.ReturnDate == null)
                     {
-                        <a class="btn btn-success" asp-action="MarkAsReturned" asp-route-id="@transaction.Id">Mark as Returned</a>
+                        <a class="btn btn-success btn-animated" asp-action="MarkAsReturned" asp-route-id="@transaction.Id">Mark as Returned</a>
                     }
-                    <a class="btn btn-danger" asp-action="DeleteTransaction" asp-route-id="@transaction.Id">Delete</a>
+                    <a class="btn btn-danger btn-animated" asp-action="DeleteTransaction" asp-route-id="@transaction.Id">Delete</a>
                 </td>
             </tr>
         }

@@ -1,8 +1,8 @@
 ﻿@model Book
 
-<h2>@ViewData["Title"]</h2>
+<h2 class="fade-in">@ViewData["Title"]</h2>
 
-<form asp-action="@ViewData["Action"]" method="post" enctype="multipart/form-data">
+<form asp-action="@ViewData["Action"]" method="post" enctype="multipart/form-data" class="fade-in-form">
     <div class="form-group">
         <label asp-for="Title"></label>
         <input asp-for="Title" class="form-control" />
@@ -40,8 +40,8 @@
     {
         <div class="form-group">
             <label>Current Image:</label>
-            <img src="@Model.ImagePath" alt="Book Image" class="img-thumbnail" style="max-width: 200px;" />
+            <img src="@Model.ImagePath" alt="Book Image" class="img-thumbnail fade-in-image" style="max-width: 200px;" />
         </div>
     }
-    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="submit" class="btn btn-primary btn-animated">Save</button>
 </form>

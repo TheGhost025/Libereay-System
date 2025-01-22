@@ -1,19 +1,19 @@
 ﻿@model UserDashboardViewModel
 
 <div class="container mt-4">
-    <div class="jumbotron text-center py-4">
+    <div class="jumbotron text-center py-4 fade-in-user">
         <h1 class="display-4">Welcome to the Library</h1>
         <p class="lead">Discover books, track your borrow history, and manage your returns.</p>
     </div>
 
     <!-- Featured Books Section -->
-    <section class="featured-books mt-5">
+    <section class="featured-books mt-5 fade-in-user">
         <h3 class="mb-4">Featured Books</h3>
         <div class="row">
             @foreach (var book in Model.FeaturedBooks)
             {
                 <div class="col-md-3 mb-4">
-                    <div class="card h-100 shadow-sm">
+                    <div class="card h-100 shadow-sm scale-hover">
                         <img class="card-img-top" src="@book.ImagePath" alt="@book.Title" style="height: 200px; object-fit: cover;">
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title text-truncate">@book.Title</h5>
@@ -27,7 +27,7 @@
     </section>
 
     <!-- Borrowed Books Section -->
-    <section class="borrowed-books mt-5">
+    <section class="borrowed-books mt-5 fade-in-user">
         <h3 class="mb-4">Your Borrowed Books</h3>
         @if (Model.BorrowedBooks.Any())
         {

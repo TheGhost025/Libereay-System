@@ -4,13 +4,13 @@
     ViewData["Title"] = Model.Title;
 }
 
-<div class="container">
-    <h2>@Model.Title</h2>
-    <div class="row">
+<div class="container fade-in">
+    <h2 class="fade-in-title">@Model.Title</h2>
+    <div class="row fade-in-content">
         <div class="col-md-4">
             @if (!string.IsNullOrEmpty(Model.ImagePath))
             {
-                <img src="@Model.ImagePath" alt="Book Image" class="img-fluid rounded" />
+                <img src="@Model.ImagePath" alt="Book Image" class="img-fluid rounded fade-in-image-book" />
             }
             else
             {
@@ -18,7 +18,7 @@
             }
         </div>
         <div class="col-md-8">
-            <table class="table">
+            <table class="table fade-in-table">
                 <tr>
                     <th>Author</th>
                     <td>@Model.Author</td>
@@ -40,7 +40,7 @@
                     <td>@Model.TotalCopies</td>
                 </tr>
             </table>
-            <a href="@Url.Action("ManageBooks", "Book")" class="btn btn-primary">Back to List</a>
+            <a href="@Url.Action("ManageBooks", "Book")" class="btn btn-primary btn-animated">Back to List</a>
         </div>
     </div>
 </div>

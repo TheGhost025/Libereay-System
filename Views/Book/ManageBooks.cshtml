@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<Book>
 
-<h2>Manage Books</h2>
-<a href="@Url.Action("AddBook", "Book")" class="btn btn-primary mb-3">Add New Book</a>
+<h2 class="fade-in-title-manage-books">Manage Books</h2>
+<a href="@Url.Action("AddBook", "Book")" class="btn btn-primary mb-3 fade-in-element">Add New Book</a>
 
-<table class="table table-striped">
+<table class="table table-striped fade-in-table-manage-books">
     <thead>
         <tr>
             <th>Image</th>
@@ -19,7 +19,7 @@
     <tbody>
         @foreach (var book in Model)
         {
-            <tr>
+            <tr class="fade-in-row">
                 <td class="d-flex justify-content-center">
                     <!-- Display book image if it exists -->
                     @if (!string.IsNullOrEmpty(book.ImagePath))
@@ -38,9 +38,9 @@
                 <td>@book.AvailableCopies</td>
                 <td>@book.TotalCopies</td>
                 <td>
-                    <a href="@Url.Action("BookDetails", "Book", new { id = book.Id })" class="btn btn-info btn-sm">View Details</a>
-                    <a href="@Url.Action("EditBook", "Book", new { id = book.Id })" class="btn btn-warning btn-sm">Edit</a>
-                    <a href="@Url.Action("DeleteBook", "Book", new { id = book.Id })" class="btn btn-danger btn-sm">Delete</a>
+                    <a href="@Url.Action("BookDetails", "Book", new { id = book.Id })" class="btn btn-info btn-sm btn-animated">View Details</a>
+                    <a href="@Url.Action("EditBook", "Book", new { id = book.Id })" class="btn btn-warning btn-sm btn-animated">Edit</a>
+                    <a href="@Url.Action("DeleteBook", "Book", new { id = book.Id })" class="btn btn-danger btn-sm btn-animated">Delete</a>
                 </td>
             </tr>
         }
